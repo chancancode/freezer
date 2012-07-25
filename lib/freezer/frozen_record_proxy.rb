@@ -3,13 +3,15 @@ require 'active_record/errors'
 
 module Freezer
   module FrozenRecordFactory
-    def self.get_class(klass)
-      klass.is_a?(Class) ? klass : klass.to_s.camelize.constantize
-    end
+    class << self
+      def get_class(klass)
+        klass.is_a?(Class) ? klass : klass.to_s.camelize.constantize
+      end
 
-    def self.build(klass, attributes, slient = false)
-      record = get_class(klass).new attributes, without_protection: true
-      FrozenRecordProxy.new(record, slient)
+      def build(klass, attributes, slient = false)
+        record = get_class(klass).new attributes, without_protection: true
+        FrozenRecordProxy.new(record, slient)
+      end
     end
   end
 
