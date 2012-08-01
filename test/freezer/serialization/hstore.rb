@@ -1,5 +1,5 @@
 require 'minitest_helper'
-require 'freezer/serialization'
+require 'freezer/serialization/hstore'
 
 module Freezer
   describe Serialization do

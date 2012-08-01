@@ -4,7 +4,7 @@ $:.unshift lib unless $:.include?(lib)
 
 Gem::Specification.new do |s|
   s.name        = 'freezer'
-  s.version     = '0.5.0'
+  s.version     = '0.6.0'
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Godfrey Chan"]
   s.email       = ["godfreykfc@gmail.com"]
@@ -19,5 +19,4 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activesupport', '>= 3.2.4'
   s.add_dependency 'activerecord', '>= 3.2.4'
-  s.add_dependency 'activerecord-postgres-hstore', '>= 0.4.0'
 end

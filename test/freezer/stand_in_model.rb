@@ -5,6 +5,19 @@ class StandInModel
 
   class << self
     attr_reader :columns
+
+    def columns_hash
+      @columns_hash ||= columns.inject({}) { |hash, column| hash[column.name] = column; hash }
+    end
+
+    def serialize(attr_name, type = BasicObject)
+      @serialized_attributes ||= {}
+      @serialized_attributes[attr_name.to_s] = type
+    end
+
+    def serialized_attributes
+      @serialized_attributes ||= {}
+    end
   end
 
   def initialize(attributes, options)
@@ -33,6 +46,14 @@ class StandInModel
   end
 
   def write_attribute(attribute, value)
+    if value && type = self.class.serialized_attributes[attribute.to_s]
+      raise ArgumentError, "Expecting #{type.inspect} but got #{value.class.inspect}." unless type === value
+
+      # Make sure it can be serialized
+      require 'yaml'
+      YAML.dump(value)
+    end
+
     @attributes[attribute.to_s] = value
   end
 
