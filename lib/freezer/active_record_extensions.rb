@@ -14,7 +14,8 @@ module Freezer
           slient: false
         })
 
-        klass = options[:class_name].camelize.constantize
+        klass = options[:class_name]
+        klass = klass.to_s.camelize.constantize unless Class === klass
         accessor_name = association_name.to_s.underscore
         serializer = if self.columns_hash[options[:column_name].to_s].type == :hstore
           require 'freezer/serialization/hstore'

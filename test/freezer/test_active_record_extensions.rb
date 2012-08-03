@@ -32,7 +32,7 @@ class Order < StandInModel
   include Freezer::ActiveRecordExtensions
 
   has_one_frozen :product, column_name: 'line_item'
-  has_one_frozen :billing_address, class_name: 'Address'
+  has_one_frozen :billing_address, class_name: Address
   has_one_frozen :shipping_address, class_name: 'Address', slient: true
 end
 
